@@ -85,7 +85,7 @@ def preprocess_features(df: pd.DataFrame):
     return X, adm_z, other_idx, g_idx, prog_mean_z
 
 
-def build_hierarchical_model(coords, X, adm_z, other_idx, g_idx, prog_mean_z):
+def build_hierarchical_model(coords, X, adm_z, other_idx, g_idx, prog_mean_z, y):
     """Define the hierarchical multinomial model."""
     model = pm.Model(coords=coords)
     with model:
@@ -126,12 +126,12 @@ def build_hierarchical_model(coords, X, adm_z, other_idx, g_idx, prog_mean_z):
         p = pm.math.softmax(η, axis=1)
 
         # Observed categorical outcome
-        pm.Categorical("y_obs", p=p, observed=df["y"].values, dims="obs")
+        pm.Categorical("y_obs", p=p, observed=y, dims="obs")
 
     return model
 
 
-def build_flat_model(coords, X, other_idx):
+def build_flat_model(coords, X, other_idx, y):
     """Define the flat (non-hierarchical) multinomial model."""
     model = pm.Model(coords=coords)
     with model:
@@ -143,12 +143,12 @@ def build_flat_model(coords, X, other_idx):
         η_flat = pt.concatenate([pt.zeros((η_nb_flat.shape[0], 1)), η_nb_flat], axis=1)
         p_flat = pm.math.softmax(η_flat, axis=1)
 
-        pm.Categorical("y_obs", p=p_flat, observed=df["y"].values, dims="obs")
+        pm.Categorical("y_obs", p=p_flat, observed=y, dims="obs")
 
     return model
 
 
-def build_extended_model(coords, X, adm_z, other_idx, g_idx, prog_mean_z):
+def build_extended_model(coords, X, adm_z, other_idx, g_idx, prog_mean_z, y):
     """Define the extended model with random slopes on unemployment rate."""
     model = pm.Model(coords=coords)
     with model:
@@ -202,7 +202,7 @@ def build_extended_model(coords, X, adm_z, other_idx, g_idx, prog_mean_z):
         η_e = pt.concatenate([pt.zeros((η_nb_e.shape[0], 1)), η_nb_e], axis=1)
         p_e = pm.math.softmax(η_e, axis=1)
 
-        pm.Categorical("y_obs", p=p_e, observed=df["y"].values, dims="obs")
+        pm.Categorical("y_obs", p=p_e, observed=y, dims="obs")
 
     return model
 
@@ -230,7 +230,7 @@ def main():
     coords = {"obs": np.arange(len(df))}
 
     # 2a. Build & sample hierarchical model
-    hier_model = build_hierarchical_model(coords, X, adm_z, other_idx, g_idx, prog_mean_z)
+    hier_model = build_hierarchical_model(coords, X, adm_z, other_idx, g_idx, prog_mean_z, df["y"].values)
     hier_trace = sample_model(
         hier_model,
         draws=3000,
@@ -252,7 +252,7 @@ def main():
     hier_trace.add_groups(posterior_predictive=ppc_hier.posterior_predictive)
 
     # 2b. Build & sample flat model
-    flat_model = build_flat_model(coords, X, other_idx)
+    flat_model = build_flat_model(coords, X, other_idx, df["y"].values)
     flat_trace = sample_model(
         flat_model,
         draws=3000,
@@ -306,7 +306,7 @@ def main():
     plt.show()
 
     # 5. Build & sample extended model
-    ext_model = build_extended_model(coords, X, adm_z, other_idx, g_idx, prog_mean_z)
+    ext_model = build_extended_model(coords, X, adm_z, other_idx, g_idx, prog_mean_z, df["y"].values)
     ext_trace = sample_model(
         ext_model,
         draws=3000,
