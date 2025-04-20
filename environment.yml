@@ -1,0 +1,15 @@
+name: student-model
+channels:
+  - conda-forge
+  - defaults
+
+dependencies:
+  - python=3.10
+  - numpy>=1.23
+  - pandas>=1.5
+  - matplotlib>=3.6
+  - pymc>=5.0
+  - arviz>=0.15
+  - pytensor>=2.11
+  - requests>=2.28
+  - jupyterlab
