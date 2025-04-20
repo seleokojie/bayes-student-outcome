@@ -20,7 +20,7 @@ student-outcome-bayes/
 ## Dataset
 The data comes from the UCI Machine Learning Repository:
 
-> Predict Students’ Dropout and Academic Success: archive.ics.uci.edu/ml/datasets/Student+Performance
+> [Predict Students’ Dropout and Academic Success:](https://archive.ics.uci.edu/dataset/697/predict+students+dropout+and+academic+success)
 
 - **Size:** 4,424 records with 36 features
 - **Outcome:** 3-class target (`Dropout`, `Enrolled`, `Graduate`)
