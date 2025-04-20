@@ -322,13 +322,40 @@ def main():
     print(az.compare({"flat": flat_loo, "hier": hier_loo, "extended": ext_loo}))
 
     # 6. Save results
-    az.to_netcdf(hier_trace, BASE / "hierarchical_model_results.nc", group="posterior")
-    az.to_netcdf(flat_trace, BASE / "flat_model_results.nc", group="posterior")
-    az.to_netcdf(ext_trace, BASE / "extended_model_results.nc", group="posterior")
+    outdir = BASE / "results"
+    outdir.mkdir(parents=True, exist_ok=True)
 
-    az.to_netcdf(hier_trace, BASE / "hierarchical_model_results_full.nc", group="posterior_predictive")
-    az.to_netcdf(flat_trace, BASE / "flat_model_results_full.nc",        group="posterior_predictive")
-    az.to_netcdf(ext_trace, BASE / "extended_model_results_full.nc",      group="posterior_predictive")
+    az.to_netcdf(
+        hier_trace,
+        outdir / "hierarchical_model_results.nc",
+        group="posterior"
+    )
+    az.to_netcdf(
+        flat_trace,
+        outdir / "flat_model_results.nc",
+        group="posterior"
+    )
+    az.to_netcdf(
+        ext_trace,
+        outdir / "extended_model_results.nc",
+        group="posterior"
+    )
+
+    az.to_netcdf(
+        hier_trace,
+        outdir / "hierarchical_model_results_full.nc",
+        group="posterior_predictive"
+    )
+    az.to_netcdf(
+        flat_trace,
+        outdir / "flat_model_results_full.nc",
+        group="posterior_predictive"
+    )
+    az.to_netcdf(
+        ext_trace,
+        outdir / "extended_model_results_full.nc",
+        group="posterior_predictive"
+    )
 
 
 if __name__ == "__main__":
