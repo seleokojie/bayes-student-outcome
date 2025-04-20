@@ -83,7 +83,7 @@ Saved NetCDF files in the project root:
 
 If you use this work, please cite:
 
-> [Eromonsele Okojie], (2025). Bayesian Multinomial Logistic Regression for Student Outcomes. GitHub repository.  
+> Eromonsele Okojie, (2025). Bayesian Multinomial Logistic Regression for Student Outcomes. GitHub repository.  
 > UCI Machine Learning Repository: Predict Students’ Dropout and Academic Success.
 
 ## License
