@@ -75,7 +75,7 @@ This will:
 
 
 ## Results
-Saved NetCDF files in the project root:
+Saved NetCDF files in the `results/` directory:
 - `hierarchical_model_results.nc`
 - `flat_model_results.nc`
 - `extended_model_results.nc`
