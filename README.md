@@ -6,11 +6,13 @@ This repository contains a Bayesian multinomial logistic regression analysis of 
 ```
 student-outcome-bayes/
 ├── data/
-│   └── data.csv             # Raw dataset (semicolon-separated)
+│   └── data.csv             # Raw dataset
 ├── notebooks/
 │   └── analysis.ipynb       # Jupyter notebook with step-by-step modeling
 ├── scripts/
-│   └── model.py             # Cleaned, reusable Python script for modeling
+│   ├── download_data.py     # Script to download the dataset
+├── model.py                 # Python script for model fitting and diagnostics
+├── environment.yml          # Conda environment file
 ├── requirements.txt         # Python dependencies
 └── README.md                # This file
 ```
@@ -62,7 +64,7 @@ conda activate student-model
 ### Script
 
 ```bash
-python scripts/model.py --data data/data.csv
+python model.py
 ```
 
 This will:
