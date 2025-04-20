@@ -4,3 +4,4 @@ pymc
 arviz
 pytensor
 matplotlib
+requests

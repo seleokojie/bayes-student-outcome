@@ -24,7 +24,11 @@ The data comes from the UCI Machine Learning Repository:
 - **Outcome:** 3-class target (`Dropout`, `Enrolled`, `Graduate`)
 - **Features:** Demographics, socio-economic status, prior grades, first-year performance metrics.
 
-Place `data.csv` in the `data/` folder (it should remain semicolon-delimited).
+Place `data.csv` in the `data/` folder (it should remain semicolon-delimited) or download it automatically using 
+```bash
+python scripts/download_data.py
+```
+- **Note:** The dataset is already included in the `data/` folder for convenience.
 
 ## Installation
 
