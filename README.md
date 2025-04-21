@@ -14,6 +14,7 @@ student-outcome-bayes/
 ├── model.py                 # Python script for model fitting and diagnostics
 ├── environment.yml          # Conda environment file
 ├── requirements.txt         # Python dependencies
+├── report.pdf               # PDF report of the analysis
 └── README.md                # This file
 ```
 
